@@ -1,0 +1,19 @@
+{
+  "name": "syniti-take-home",
+  "version": "1.0.0",
+  "description": "syniti-take-home",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc --build && node dist/validateData.js",
+    "build": "tsc --build",
+    "test": "jest"
+  },
+  "author": "Forrest Alvarez",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.3",
+    "typescript": "^4.1.2"
+  }
+}
