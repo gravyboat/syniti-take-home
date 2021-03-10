@@ -19,10 +19,7 @@ export const validZipCode = (zipcode: string): boolean => {
     return /^\d{5}(-\d{4})?$/.test(zipcode);
 };
 
-export const writeOutput = (
-    addressArray: userAddressFormat[],
-    outputPath: string
-) => {
+const writeOutput = (addressArray: userAddressFormat[], outputPath: string) => {
     const validOutputPath: string = path.join(__dirname, '../', outputPath);
 
     writeFileSync(validOutputPath, JSON.stringify(addressArray), 'utf-8');
@@ -62,4 +59,8 @@ export const validateAndOptionallyWriteData = (
     return [validAddressArray, invalidAddressArray];
 };
 
-validateAndOptionallyWriteData('data/data.json', 'output/valid.json', 'output/invalid.json');
+validateAndOptionallyWriteData(
+    'data/data.json',
+    'output/valid.json',
+    'output/invalid.json'
+);
