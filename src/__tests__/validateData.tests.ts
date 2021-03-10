@@ -8,32 +8,35 @@ import {
 import path from 'path';
 
 describe('read in data', () => {
-    test('Reads in JSON aray file to confirm local file access', () => {
+    test('reads in JSON aray file to confirm local file access', () => {
         expect(readJsonFile('data/testData/data.json')).toBeInstanceOf(Array);
     });
 });
 
-describe('Checks zipcodes for validity', () => {
-    test('Checks if a null zipcode is valid', () => {
+describe('checks zipcodes for validity', () => {
+    test('checks if a null zipcode is valid', () => {
         expect(validZipCode(null)).toThrowError;
     });
 
-    test('Checks if an undefined zipcode is valid', () => {
+    test('rhecks if an undefined zipcode is valid', () => {
         expect(validZipCode(null)).toThrowError;
     });
-    test('Checks if a short zipcode is valid', () => {
+    test('checks if a short zipcode is valid', () => {
         expect(validZipCode('9810')).toBe(false);
     });
-    test('Checks if a long zipcode is valid', () => {
+    test('checks if a long zipcode is valid', () => {
         expect(validZipCode('981011')).toBe(false);
     });
-    test('Checks if a valid zipcode is valid', () => {
+    test('checks if a valid zipcode is valid', () => {
         expect(validZipCode('98101')).toBe(true);
     });
 });
 
 describe('validates JSON data', () => {
     test('reads JSON array to ensure valid values are correct', () => {
+        expect(validateData('data/testData/data.json')).toBeInstanceOf(Array);
+    });
+    test('reads JSON array to ensure valid data is created and writes to a file', () => {
         validateData(
             'data/testData/data.json',
             'data/testData/valid.json',
@@ -50,7 +53,7 @@ describe('validates JSON data', () => {
             readFileSync(path.join(__dirname, '../../data/testData/valid.json'))
         );
     });
-    test('reads JSON array to ensure invalid values are correct', () => {
+    test('reads JSON array to ensure invalid data is created and writes to a file', () => {
         validateData(
             'data/testData/data.json',
             'data/testData/valid.json',

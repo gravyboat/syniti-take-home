@@ -19,16 +19,40 @@ export const validZipCode = (zipcode: string): boolean => {
     return /^\d{5}(-\d{4})?$/.test(zipcode);
 };
 
+export const writeValidOutput = (
+    validAddressArray: userAddressFormat[],
+    validOutput: string
+) => {
+    const validOutputPath: string = path.join(__dirname, '../', validOutput);
+
+    writeFileSync(validOutputPath, JSON.stringify(validAddressArray), 'utf-8');
+};
+
+export const writeInvalidOutput = (
+    invalidAddressArray: userAddressFormat[],
+    invalidOutput: string
+) => {
+    const invalidOutputPath: string = path.join(
+        __dirname,
+        '../',
+        invalidOutput
+    );
+
+    writeFileSync(
+        invalidOutputPath,
+        JSON.stringify(invalidAddressArray),
+        'utf-8'
+    );
+};
+
 export const validateData = (
     filePath: string,
-    validOutput: string,
-    invalidOutput: string
-): void => {
-    const jsonDataArray = readJsonFile(filePath);
-    const validAddressArray = [];
-    const invalidAddressArray = [];
-    const validOutputPath = path.join(__dirname, '../', validOutput);
-    const invalidOutputPath = path.join(__dirname, '../', invalidOutput);
+    validOutputPath?: string,
+    invalidOutputPath?: string
+): userAddressFormat[][] => {
+    const jsonDataArray: userAddressFormat[] = readJsonFile(filePath);
+    const validAddressArray: userAddressFormat[] = [];
+    const invalidAddressArray: userAddressFormat[] = [];
 
     jsonDataArray.forEach((entry) => {
         if (
@@ -45,12 +69,14 @@ export const validateData = (
             invalidAddressArray.push(entry);
         }
     });
-    writeFileSync(validOutputPath, JSON.stringify(validAddressArray), 'utf-8');
-    writeFileSync(
-        invalidOutputPath,
-        JSON.stringify(invalidAddressArray),
-        'utf-8'
-    );
+    if (validOutputPath) {
+        writeValidOutput(validAddressArray, validOutputPath);
+    }
+    if (invalidOutputPath) {
+        writeInvalidOutput(invalidAddressArray, invalidOutputPath);
+    }
+
+    return [validAddressArray, invalidAddressArray];
 };
 
 validateData('data/data.json', 'output/valid.json', 'output/invalid.json');

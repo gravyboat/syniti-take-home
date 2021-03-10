@@ -38,11 +38,22 @@ For the provided test data use the following steps:
 
 Data will be output in to the `output` directory as an example.
 
-For your own data:
+For your own data if you want to write to a file:
 
 ```
 // make sure you have the appropriate path since this isn't a module
 import validateData from 'validateData'
 
-validateData('pathToInputFile', 'pathToValidOutputFile', 'pathToInvalidOutputFile')
+validateData('pathToInputFile', 'pathToValidOutputFile', 'pathToInvalidOutputFile');
 ```
+
+For your own data if you don't want to write to a file:
+
+```
+// make sure you have the appropriate path since this isn't a module
+import validateData from 'validateData'
+
+validateData('pathToInputFile');
+```
+
+Both calls to the function will return an array of the valid and invalid data arrays.
