@@ -36,6 +36,19 @@ describe('validates JSON data', () => {
     test('reads JSON array to ensure valid values are correct', () => {
         expect(validateData('data/testData/data.json')).toBeInstanceOf(Array);
     });
+    test('reads JSON array to ensure valid data is created and writes to the output file when only an output path is provided', () => {
+        validateData('data/testData/data.json', 'data/testData/valid.json');
+        expect(
+            readFileSync(
+                path.join(
+                    __dirname,
+                    '../../data/testData/mockResults/valid.json'
+                )
+            )
+        ).toEqual(
+            readFileSync(path.join(__dirname, '../../data/testData/valid.json'))
+        );
+    });
     test('reads JSON array to ensure valid data is created and writes to a file', () => {
         validateData(
             'data/testData/data.json',
