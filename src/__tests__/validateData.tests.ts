@@ -3,7 +3,7 @@ import {
     userAddressFormat,
     validZipCode,
     readJsonFile,
-    validateData,
+    validateAndOptionallyWriteData,
 } from '../validateData';
 import path from 'path';
 
@@ -34,10 +34,10 @@ describe('checks zipcodes for validity', () => {
 
 describe('validates JSON data', () => {
     test('reads JSON array to ensure valid values are correct', () => {
-        expect(validateData('data/testData/data.json')).toBeInstanceOf(Array);
+        expect(validateAndOptionallyWriteData('data/testData/data.json')).toBeInstanceOf(Array);
     });
     test('reads JSON array to ensure valid data is created and writes to the output file when only an output path is provided', () => {
-        validateData('data/testData/data.json', 'data/testData/valid.json');
+        validateAndOptionallyWriteData('data/testData/data.json', 'data/testData/valid.json');
         expect(
             readFileSync(
                 path.join(
@@ -50,7 +50,7 @@ describe('validates JSON data', () => {
         );
     });
     test('reads JSON array to ensure valid data is created and writes to a file', () => {
-        validateData(
+        validateAndOptionallyWriteData(
             'data/testData/data.json',
             'data/testData/valid.json',
             'data/testData/invalid.json'
@@ -67,7 +67,7 @@ describe('validates JSON data', () => {
         );
     });
     test('reads JSON array to ensure invalid data is created and writes to a file', () => {
-        validateData(
+        validateAndOptionallyWriteData(
             'data/testData/data.json',
             'data/testData/valid.json',
             'data/testData/invalid.json'

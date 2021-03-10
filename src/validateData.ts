@@ -28,7 +28,7 @@ export const writeOutput = (
     writeFileSync(validOutputPath, JSON.stringify(addressArray), 'utf-8');
 };
 
-export const validateData = (
+export const validateAndOptionallyWriteData = (
     filePath: string,
     validOutputPath?: string,
     invalidOutputPath?: string
@@ -62,4 +62,4 @@ export const validateData = (
     return [validAddressArray, invalidAddressArray];
 };
 
-validateData('data/data.json', 'output/valid.json', 'output/invalid.json');
+validateAndOptionallyWriteData('data/data.json', 'output/valid.json', 'output/invalid.json');
