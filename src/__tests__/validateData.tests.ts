@@ -50,7 +50,7 @@ describe('validates JSON data', () => {
             readFileSync(path.join(__dirname, '../../data/testData/valid.json'))
         );
     });
-    test('reads JSON array to ensure valid values are correct', () => {
+    test('reads JSON array to ensure invalid values are correct', () => {
         validateData(
             'data/testData/data.json',
             'data/testData/valid.json',
